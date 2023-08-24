@@ -37,7 +37,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 
         CEVAP: 	
                 SELECT * FROM ogrenci
-                WHERE cinsiyet = 'K'
+                WHERE cinsiyet = K
 	
 	4) Öğrenci tablosunda kaydı bulunan sınıfların adını her sınıf bir kez görüntülenecek şekilde listeleyiniz
 	
@@ -56,7 +56,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 
 	7) Öğrenci tablosundaki öğrencinin adını, soyadını ve numarasını okul numarası olarak listeleyiniz. (as kullanım örneği)
 	
-        CEVAP: SELECT ograd, ogrsoyad , ogrno AS 'Okul_Numarasi' FROM ogrenci
+        CEVAP: SELECT ograd, ogrsoyad, ogrno AS 'Okul_Numarasi' FROM ogrenci
 	
 	8) Öğrenci tablosundaki öğrencinin adını ve soyadını birleştirip, adsoyad olarak listeleyiniz. (concat, as kullanım örneği)
 	
@@ -72,7 +72,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 
         CEVAP: SELECT kitapadi, sayfasayisi FROM kitap
                WHERE sayfasayisi
-               BETWEEN '50' AND '200'
+               BETWEEN 50 AND 200
 
 	11) Öğrenci tablosunda adı Fidan, İsmail ve Leyla olan öğrencileri listeleyiniz.
 	
@@ -82,7 +82,10 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 	12) Öğrenci tablosundaki öğrencilerden adı A, D ve K ile başlayan öğrencileri listeleyiniz.
 	
         CEVAP: SELECT * FROM ogrenci
-               WHERE ograd LIKE 'D%' OR 'A%' OR 'K%' 	    
+               WHERE ograd LIKE 'D%' OR ograd LIKE 'A%' OR ograd LIKE 'K%'
+
+        ALTERNATİF : SELECT * FROM ogrenci 
+                     WHERE LEFT(ograd, 1) IN ('D', 'A', 'K');
 
 	13) Öğrenci tablosundaki sınıfı 9A olan Erkekleri veya sınıfı 9B olan kızların adını, soyadını, sınıfını ve cinsiyetini listeleyiniz.
 	
@@ -94,6 +97,9 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 	    CEVAP: SELECT * FROM ogrenci
                WHERE (sinif = '10A' OR sinif = '10B') AND cinsiyet = 'E';
 
+	    ALTERNATİF: SELECT * FROM ogrenci
+                    WHERE sinif in ('10A', '10B') AND cinsiyet = 'E';
+
 	15) Öğrenci tablosunda doğum yılı 1989 olan öğrencileri listeleyiniz.
 
         CEVAP: 	SELECT * FROM ogrenci
@@ -102,8 +108,8 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 	16) Öğrenci numarası 30 ile 50 arasında olan Kız öğrencileri listeleyiniz.
 	
 	        CEVAP: 	SELECT * FROM ogrenci
-                    WHERE ogrno
-                    BETWEEN '30' AND '50'
+                    WHERE cinsiyet = 'K' AND
+                    ogrno BETWEEN '30' AND '50'
 
 	17) Öğrencileri adına göre sıralayınız (alfabetik).
 
@@ -159,10 +165,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 	
 	26) Öğrencileri sınıflarına göre gruplayarak listeleyin.
 	
-	        CEVAP: 	SELECT * FROM ogrenci
-                    WHERE dtarih IS NOT NULL AND sinif = '10A'
-                    ORDER BY dtarih ASC
-                    LIMIT 1
+	        CEVAP: --
 	
 	27) Öğrencileri her sorgulamada sıralaması farklı olacak şekilde rastgele listeleyin. 
 	[İPUCU: rand() fonksiyonu]
@@ -179,6 +182,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 	29) 10A sınıfından rastgele bir öğrencinin adını, soyadını, numarasını ve sınıfını getirin.
 	
 	        CEVAP: 	SELECT ograd, ogrsoyad, ogrno, sinif FROM ogrenci
+                    WHERE sinif = '10A'
                     ORDER BY rand()
                     LIMIT 1;
 	
@@ -187,7 +191,9 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 	Öğrenci isimlerinin sayısını "adet" olarak öğrencilerin isimleri "isim" olarak listeleyin. 
 	[İPUCU: count() ve group by]
 
-            CEVAP: 	SELECT COUNT(*) AS Adet, ograd AS Name FROM ogrenci
-                    GROUP BY ograd;
+            CEVAP: 	        SELECT COUNT(*) AS Adet, ograd AS Name FROM ogrenci
+                            GROUP BY Name;            
+            ALTERNATIF: 	SELECT COUNT(ograd) AS Adet, ograd AS Name FROM ogrenci
+                            GROUP BY Name;
 
 
