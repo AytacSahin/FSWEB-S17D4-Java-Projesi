@@ -146,26 +146,45 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
                     LIMIT 1
 
 	24) 10A sınıfındaki en yaşlı öğrenciyi listeyin.
-	
+
+	        CEVAP: 	SELECT * FROM ogrenci
+                    WHERE dtarih IS NOT NULL AND sinif = '10A'
+                    ORDER BY dtarih ASC
+                    LIMIT 1
 	
 	25) İkinci harfi N olan kitapları listeleyiniz.
-	
+
+	        CEVAP: 	SELECT * FROM kitap
+                    WHERE kitapadi LIKE '_N%'
 	
 	26) Öğrencileri sınıflarına göre gruplayarak listeleyin.
 	
+	        CEVAP: 	SELECT * FROM ogrenci
+                    WHERE dtarih IS NOT NULL AND sinif = '10A'
+                    ORDER BY dtarih ASC
+                    LIMIT 1
 	
 	27) Öğrencileri her sorgulamada sıralaması farklı olacak şekilde rastgele listeleyin. 
 	[İPUCU: rand() fonksiyonu]
-	
+
+	        CEVAP: 	SELECT * FROM ogrenci
+                    ORDER BY rand();
 	
 	28) Öğrenci tablosundan Rastgele bir öğrenci seçiniz.
 	
+	        CEVAP: 	SELECT * FROM ogrenci
+                    ORDER BY rand()
+                    LIMIT 1;
 	
 	29) 10A sınıfından rastgele bir öğrencinin adını, soyadını, numarasını ve sınıfını getirin.
 	
+	        CEVAP: 	SELECT ograd, ogrsoyad, ogrno, sinif FROM ogrenci
+                    ORDER BY rand()
+                    LIMIT 1;
 	
 	# Esnek
 	30) Öğrenci tablosunda aynı isimde kaçar öğrenci olduğunu bulmak istiyoruz. 
 	Öğrenci isimlerinin sayısını "adet" olarak öğrencilerin isimleri "isim" olarak listeleyin. 
 	[İPUCU: count() ve group by]
+
 
